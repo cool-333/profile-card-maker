@@ -21,6 +21,7 @@
           ><button id="bt-green">에메랄드</button
           ><button id="bt-pink">코랄 핑크</button>
         </span>
+        <!-- 💫 컬러 파레트에서 색상 선택 시 RGB< HSL, HEX값 출력되는 것 : 배운 후 구현 필요. 💫 -->
         <span class="color-container">
           <div class="inputbox point-box">
             <p>포인트/카드 테두리 색상</p>
@@ -45,6 +46,23 @@
           maxlength="30"
           placeholder="소개 한 마디"
         />
+        <!-- 💫 버튼 클릭 시 항목 삭제되는 기능 : 배운 후 구현 필요. 💫 -->
+        <div class="hobby-content">
+          <input class="inputbox hobby" maxlength="6" placeholder="항목" />
+          <input
+            class="inputbox hobby-text"
+            maxlength="20"
+            placeholder="내용"
+          />
+          <button class="delete">삭제</button>
+        </div>
+        <div class="like-content">
+          <input class="inputbox like" maxlength="6" placeholder="항목" />
+          <input class="inputbox like-text" maxlength="20" placeholder="내용" />
+          <button class="delete">삭제</button>
+        </div>
+        <!-- 💫 항목 추가 기능 : 배운 후 구현 필요. 💫 -->
+        <button class="add-hobby">+ 항목 추가하기</button>
       </div>
       <div class="preview"></div>
     </div>
