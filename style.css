@@ -1,0 +1,150 @@
+html {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #303030;
+}
+
+:root {
+  --grey: #d3d3d3;
+  --darknavy: #1e293b;
+  --darkred: #d30004;
+  --foreground: #334155;
+  --background: #38bdf8;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outbox {
+  width: 780px;
+  height: 780px;
+  border: 1px var(--grey) solid;
+  border-radius: 12px;
+  background-color: #0e192b;
+  display: flex;
+}
+
+.writebox,
+.preview {
+  margin: auto;
+}
+
+.writebox {
+  width: 343px;
+  height: 710px;
+  background: var(--darknavy);
+  border: 1px var(--foreground) solid;
+  border-radius: 12px;
+  padding: 10px 15px;
+}
+
+.preview {
+  width: 343px;
+  height: 335px;
+  background-color: var(--darknavy);
+  border: 2px var(--background) solid;
+  border-radius: 16px;
+}
+
+.preset-bts {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+#bt-blue,
+#bt-green,
+#bt-pink {
+  width: 90px;
+  height: 25px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+#bt-blue {
+  background-color: var(--foreground);
+  border: 1px var(--background) solid;
+  color: var(--background);
+}
+
+#bt-green {
+  background-color: #064e3b;
+  border: 1px #34d399 solid;
+  color: #34d399;
+}
+
+#bt-pink {
+  background-color: #2a1215;
+  border: 1px #ffaaaa solid;
+  color: #ffaaaa;
+}
+
+/* ✨✨✨ 입력창 스타일 ✨✨✨ */
+.inputbox {
+  background-color: #0f172a;
+  border: 1px #334155 solid;
+  border-radius: 6px;
+}
+/* ✨✨✨ 입력창 스타일 ✨✨✨ */
+
+.point-box,
+.back-box {
+  width: 145px;
+  height: 80px;
+  color: var(--grey);
+  padding: 3px 5px;
+}
+
+.color-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+
+.color-value {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.color-value > p {
+  width: 30px;
+  height: 12px;
+}
+
+.name-mbti {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom:;
+}
+
+.name,
+.mbti,
+.in-a-word {
+  height: 31.11px;
+  color: white;
+  font-size: 12px;
+}
+
+.name {
+  width: 200px;
+}
+
+.mbti {
+  width: 100px;
+}
+
+.in-a-word {
+  margin-top: 5px;
+  width: 310px;
+}
