@@ -15,23 +15,33 @@
   </head>
   <body>
     <div class="outbox">
+      <!-- 여기서부터 입력창 박스 코드 -->
       <div class="writebox">
         <span class="preset-bts">
           <button id="bt-blue">다크 블루</button
           ><button id="bt-green">에메랄드</button
           ><button id="bt-pink">코랄 핑크</button>
         </span>
+
         <!-- 💫 컬러 파레트에서 색상 선택 시 RGB< HSL, HEX값 출력되는 것 : 배운 후 구현 필요. 💫 -->
         <span class="color-container">
           <div class="inputbox point-box">
-            <p>포인트/카드 테두리 색상</p>
-            <span class="color-value">
+            <p id="pt-color">포인트/카드 테두리 색상</p>
+            <span class="pt-color-value">
               <p>RGB</p>
               <p>HSL</p>
               <p>HEX</p>
             </span>
           </div>
-          <div class="inputbox back-box">전체 배경 색상</div>
+
+          <div class="inputbox back-box">
+            <p id="bg-color">전체 배경 색상</p>
+            <span class="bg-color-value">
+              <p>RGB</p>
+              <p>HSL</p>
+              <p>HEX</p>
+            </span>
+          </div>
         </span>
         <div class="name-mbti">
           <input
@@ -46,6 +56,7 @@
           maxlength="30"
           placeholder="소개 한 마디"
         />
+
         <!-- 💫 버튼 클릭 시 항목 삭제되는 기능 : 배운 후 구현 필요. 💫 -->
         <div class="hobby-content">
           <input class="inputbox hobby" maxlength="6" placeholder="항목" />
@@ -63,13 +74,15 @@
         </div>
         <!-- 💫 항목 추가 기능 : 배운 후 구현 필요. 💫 -->
         <button class="add-hobby">+ 항목 추가하기</button>
+
         <!-- 💫 슬라이더 값을 슬라이더 수치값과 동일하게 하는 기능 : 배운 후 구현 필요. 💫 -->
         <div class="status1">
-          <input class="inputbox stat1" maxlength="6" placeholder="항목" />
+          <input class="inputbox stat1" maxlength="4" placeholder="항목" />
           <input
             class="inputbox stat1-value"
             min="0"
             max="100"
+            maxlength="3"
             placeholder="수치"
             type="number"
           />
@@ -85,11 +98,12 @@
         </div>
 
         <div class="status2">
-          <input class="inputbox stat2" maxlength="6" placeholder="항목" />
+          <input class="inputbox stat2" maxlength="4" placeholder="항목" />
           <input
             class="inputbox stat2-value"
             min="0"
             max="100"
+            maxlength="3"
             placeholder="수치"
             type="number"
           />
@@ -105,11 +119,12 @@
         </div>
 
         <div class="status3">
-          <input class="inputbox stat3" maxlength="6" placeholder="항목" />
+          <input class="inputbox stat3" maxlength="4" placeholder="항목" />
           <input
             class="inputbox stat3-value"
             min="0"
             max="100"
+            maxlength="3"
             placeholder="수치"
             type="number"
           />
@@ -125,11 +140,12 @@
         </div>
 
         <div class="status4">
-          <input class="inputbox stat4" maxlength="6" placeholder="항목" />
+          <input class="inputbox stat4" maxlength="4" placeholder="항목" />
           <input
             class="inputbox stat4-value"
             min="0"
             max="100"
+            maxlength="3"
             placeholder="수치"
             type="number"
           />
@@ -144,8 +160,67 @@
           <button class="delete">삭제</button>
         </div>
         <button class="add-stat">+ 능력치 추가하기</button>
+
+        <input class="inputbox trait" maxlength="12" placeholder="⚠특이사항" />
+        <textarea
+          class="inputbox trait-text"
+          maxlength="60"
+          placeholder="특이사항에 관한 설명을 입력하세요"
+        ></textarea>
       </div>
-      <div class="preview"></div>
+
+      <!-- 여기서부터 프리뷰 박스 코드 -->
+      <div class="preview">
+        <div id="pre-name-mbti">
+          <div class="pre-name">이름 또는 닉네임</div>
+          <div class="pre-mbti">MBTI-A</div>
+        </div>
+        <blockquote id="pre-in-a-word">"소개 한 마디···."</blockquote>
+
+        <div id="pre-hobby-text">
+          <div class="pre-hobby">취미</div>
+          <div class="pre-hobby-text">음악 듣기</div>
+        </div>
+
+        <div id="pre-like-text">
+          <div class="pre-like">좋아하는 것</div>
+          <div class="pre-like-text">탄산음료</div>
+        </div>
+
+        <div id="pre-statbox">
+          <div id="pre-statbox1">
+            <div class="pre-stat1">체력</div>
+            <div class="pre-slider1">
+              <div class="pre-slider1-fill"></div>
+            </div>
+            <div class="pre-stat1-value">20</div>
+          </div>
+          <div id="pre-statbox2">
+            <div class="pre-stat2">근력</div>
+            <div class="pre-slider2">
+              <div class="pre-slider2-fill"></div>
+            </div>
+            <div class="pre-stat1-value">30</div>
+          </div>
+          <div id="pre-statbox3">
+            <div class="pre-stat3">집중력</div>
+            <div class="pre-slider3">
+              <div class="pre-slider3-fill"></div>
+            </div>
+            <div class="pre-stat1-value">90</div>
+          </div>
+          <div id="pre-statbox4">
+            <div class="pre-stat4">오타쿠력</div>
+            <div class="pre-slider4"><div class="pre-slider4-fill"></div></div>
+            <div class="pre-stat4-value">100</div>
+          </div>
+        </div>
+
+        <div class="pre-trait">⚠특이사항</div>
+        <div class="pre-trait-text">마감일을 엄수하려는 성향이 있다.</div>
+
+        <div class="confidential">CONFIDENTIAL</div>
+      </div>
     </div>
   </body>
 </html>

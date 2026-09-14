@@ -23,6 +23,8 @@ body {
   align-items: center;
 }
 
+/* -------------------- 여기부터 입력창란 -------------------- */
+
 .outbox {
   width: 780px;
   height: 780px;
@@ -48,10 +50,11 @@ body {
 
 .preview {
   width: 343px;
-  height: 335px;
+  height: 350px;
   background-color: var(--darknavy);
   border: 2px var(--background) solid;
   border-radius: 16px;
+  overflow: hidden;
 }
 
 .preset-bts {
@@ -93,6 +96,7 @@ body {
   border: 1px #334155 solid;
   border-radius: 6px;
   padding: 0px 0px 0px 10px;
+  color: var(--grey);
 }
 /* ✨✨✨ 입력창 스타일 ✨✨✨ */
 
@@ -100,7 +104,6 @@ body {
 .back-box {
   width: 145px;
   height: 80px;
-  color: var(--grey);
   padding: 3px 5px;
 }
 
@@ -111,14 +114,21 @@ body {
   margin-bottom: 10px;
 }
 
-.color-value {
+#pt-color,
+#bg-color {
+  margin-bottom: 3px;
+}
+
+.pt-color-value,
+.bg-color-value {
   height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.color-value > p {
+.pt-color-value p,
+.bg-color-value p {
   width: 30px;
   height: 12px;
 }
@@ -164,7 +174,6 @@ body {
   height: 31.11px;
   font-size: 12px;
   font-weight: bold;
-  color: var(--grey);
   text-align: center;
 }
 
@@ -172,7 +181,6 @@ body {
   width: 180px;
   height: 31.11px;
   font-size: 12px;
-  color: var(--grey);
 }
 
 .delete {
@@ -197,7 +205,6 @@ body {
   height: 31.11px;
   font-size: 12px;
   font-weight: bold;
-  color: var(--grey);
   text-align: center;
 }
 
@@ -205,7 +212,6 @@ body {
   width: 180px;
   height: 31.11px;
   font-size: 12px;
-  color: var(--grey);
 }
 
 .add-hobby,
@@ -255,7 +261,6 @@ body {
   width: 50px;
   height: 31.11px;
   font-size: 12px;
-  color: var(--grey);
 }
 
 .slider1,
@@ -266,8 +271,198 @@ body {
   top: 15px;
   width: 100px;
   height: 8px;
-  /* accent-color : 슬라이더의 배경색을 바꿔주는 태그. */
+  /* accent-color : input type="range"와 같은 폼 요소의 강조색을 바꿔주는 태그. */
   accent-color: var(--background);
-  foreground-color: var(--foreground);
+  color: var(--foreground);
   border-radius: 8px;
+}
+
+.trait {
+  width: 180px;
+  height: 31.11px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.trait-text {
+  width: 310px;
+  height: 82.95px;
+  font-size: 12px;
+  padding: 5px 5px;
+  /* 텍스트 한 줄은 input, 여러 줄은 textarea로 적은 후 resize를 금지시키는 게 낫다. */
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* -------------------- 여기부터 미리보기(프리뷰)란, 입력란 채울 시 보이도록 자바스크립트 배운 후 수정 -------------------- */
+
+.preview {
+  padding: 15px 20px;
+}
+
+#pre-name-mbti {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pre-name {
+  width: 200px;
+  height: 30px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pre-mbti {
+  width: 55px;
+  height: 23px;
+  background-color: var(--background);
+  font-weight: 450;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 10px 50px 0px 10px;
+  padding: 2px 0px;
+}
+
+#pre-in-a-word {
+  width: 300px;
+  height: 30px;
+  color: var(--grey);
+  background-color: rgba(255, 255, 255, 0.3);
+  border-left: 3px var(--background) solid;
+  padding: 5px 8px;
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+#pre-hobby-text,
+#pre-like-text {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.pre-hobby,
+.pre-like {
+  width: 100px;
+  height: 15px;
+  font-size: 14px;
+  color: var(--grey);
+  font-weigh: bold;
+}
+
+.pre-hobby-text,
+.pre-like-text {
+  width: 200px;
+  height: 15px;
+  text-align: right;
+  font-size: 14px;
+  color: var(--grey);
+}
+
+#pre-statbox {
+  margin-top: 12px;
+  margin-bottom: 10px;
+  padding: 5px 5px;
+  border: 1px var(--grey) solid;
+  border-radius: 8px;
+}
+
+#pre-statbox1,
+#pre-statbox2,
+#pre-statbox3,
+#pre-statbox4 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pre-stat1,
+.pre-stat2,
+.pre-stat3,
+.pre-stat4 {
+  width: 55px;
+  height: 15px;
+  font-size: 14px;
+  color: var(--grey);
+}
+
+.pre-slider1,
+.pre-slider2,
+.pre-slider3,
+.pre-slider4 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 200px;
+  height: 8px;
+  background-color: var(--foreground);
+  border-radius: 4px;
+}
+
+.pre-slider1-fill {
+  width: 40px;
+  height: 8px;
+  background-color: var(--background);
+  border-radius: 4px;
+}
+.pre-slider2-fill {
+  width: 60px;
+  height: 8px;
+  background-color: var(--background);
+  border-radius: 4px;
+}
+.pre-slider3-fill {
+  width: 180px;
+  height: 8px;
+  background-color: var(--background);
+  border-radius: 4px;
+}
+.pre-slider4-fill {
+  width: 200px;
+  height: 8px;
+  background-color: var(--background);
+  border-radius: 4px;
+}
+
+.pre-stat1-value,
+.pre-stat2-value,
+.pre-stat3-value,
+.pre-stat4-value {
+  width: 30px;
+  height: 15px;
+  font-size: 12px;
+  color: var(--grey);
+  text-align: center;
+}
+
+.pre-trait {
+  width: 100px;
+  height: 15px;
+  font-size: 12px;
+  color: var(--grey);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.pre-trait-text {
+  width: 300px;
+  height: 30px;
+  font-size: 12px;
+  color: var(--grey);
+}
+
+.confidential {
+  color: var(--darkred);
+  font-weight: bold;
+  font-size: 12px;
+  width: 180px;
+  text-align: center;
+  position: relative;
+  top: -288px;
+  left: 194px;
+  transform: rotate(45deg);
+  border: 1px var(--darkred) dashed;
 }
