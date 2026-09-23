@@ -114,6 +114,12 @@ body {
   margin-bottom: 10px;
 }
 
+.color-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #pt-color,
 #bg-color {
   margin-bottom: 3px;
@@ -127,9 +133,27 @@ body {
   justify-content: space-between;
 }
 
-.pt-color-value p,
-.bg-color-value p {
-  width: 30px;
+.pt-picker,
+.bg-picker {
+  width: 28px;
+  height: 16px;
+  padding: 0px;
+  border: none;
+}
+
+.color-value-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+#pt-color-rgb,
+#pt-color-hsl,
+#pt-color-hex,
+#bg-color-rgb,
+#bg-color-hsl,
+#bg-color-hex {
+  text-align: right;
+  width: 95px;
   height: 12px;
 }
 

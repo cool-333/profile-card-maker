@@ -26,20 +26,44 @@
         <!-- 💫 컬러 파레트에서 색상 선택 시 RGB< HSL, HEX값 출력되는 것 : 배운 후 구현 필요. 💫 -->
         <span class="color-container">
           <div class="inputbox point-box">
-            <p id="pt-color">포인트/카드 테두리 색상</p>
+            <div class="color-title">
+              <p id="pt-color">포인트/카드 테두리 색상</p>
+              <input type="color" class="pt-picker" value="#38bdf8" />
+            </div>
             <span class="pt-color-value">
-              <p>RGB</p>
-              <p>HSL</p>
-              <p>HEX</p>
+              <div class="color-value-row">
+                <p>RGB</p>
+                <span id="pt-color-rgb"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HSL</p>
+                <span id="pt-color-hsl"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HEX</p>
+                <span id="pt-color-hex"></span>
+              </div>
             </span>
           </div>
 
           <div class="inputbox back-box">
-            <p id="bg-color">전체 배경 색상</p>
+            <div class="color-title">
+              <p id="bg-color">전체 배경 색상</p>
+              <input type="color" class="bg-picker" value="#0f172a" />
+            </div>
             <span class="bg-color-value">
-              <p>RGB</p>
-              <p>HSL</p>
-              <p>HEX</p>
+              <div class="color-value-row">
+                <p>RGB</p>
+                <span id="bg-color-rgb"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HSL</p>
+                <span id="bg-color-hsl"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HEX</p>
+                <span id="bg-color-hex"></span>
+              </div>
             </span>
           </div>
         </span>
@@ -222,5 +246,6 @@
         <div class="confidential">CONFIDENTIAL</div>
       </div>
     </div>
+    <script src="./move.js"></script>
   </body>
 </html>
