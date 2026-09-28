@@ -47,6 +47,9 @@ body {
   border-radius: 12px;
   padding: 10px 15px;
 }
+.writebox {
+  overflow-y: auto;
+}
 
 .preview {
   width: 343px;
@@ -73,9 +76,9 @@ body {
 }
 
 #bt-blue {
-  background-color: var(--foreground);
-  border: 1px var(--background) solid;
-  color: var(--background);
+  background-color: #334155;
+  border: 1px #38bdf8 solid;
+  color: #38bdf8;
 }
 
 #bt-green {
@@ -351,7 +354,7 @@ body {
   padding: 2px 0px;
 }
 
-#pre-in-a-word {
+.pre-in-a-word {
   width: 300px;
   height: 30px;
   color: var(--grey);
@@ -478,7 +481,7 @@ body {
   color: var(--grey);
 }
 
-.confidential {
+.UNLOCKED {
   color: var(--darkred);
   font-weight: bold;
   font-size: 12px;
