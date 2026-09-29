@@ -1,3 +1,5 @@
+// mbti에 - 또는 알파벳 대문자 또는 소문자만 출력될 수 있도록 제한
+
 // 포인트 컬러피커 움직이면 헥스코드 출력
 const ptPicker = document.querySelector(".pt-picker");
 ptPicker.addEventListener("input", () => {
@@ -213,11 +215,15 @@ addHobby.addEventListener("click", () => {
   addInputText.classList.add("inputbox", "hobby-text");
   addDeleteBt.classList.add("delete");
 
-  const deleteBts = document.querySelectorAll(".delete");
-  deleteBts.forEach((deleteBt) => {
-    deleteBt.addEventListener("click", () => {
-      deleteBt.parentElement.remove();
-    });
+  addDeleteBt.addEventListener("click", () => {
+    newContent.remove();
+  });
+});
+
+const deleteBts = document.querySelectorAll(".delete");
+deleteBts.forEach((deleteBt) => {
+  deleteBt.addEventListener("click", () => {
+    deleteBt.parentElement.remove();
   });
 });
 
@@ -269,6 +275,9 @@ name.addEventListener("input", () => {
   preName.textContent = name.value;
 });
 const mbti = document.querySelector(".mbti");
+mbti.addEventListener("input", (e) => {
+  e.target.value = e.target.value.replace(/[^A-Za-z-]/g, "");
+});
 const preMbti = document.querySelector(".pre-mbti");
 mbti.addEventListener("input", () => {
   preMbti.textContent = mbti.value;
@@ -384,3 +393,34 @@ slider4.addEventListener("input", () => {
   preStat4Value.textContent = slider4.value;
   preSlider4Fill.style.width = slider4.value + "%";
 });
+
+// 수치값을 100 초과하게 입력하지 못하도록 제한  -------------------- 🎈 2 3 4 도 수정 필요 🎈 --------------------
+stat1Value.addEventListener("input", () => {
+  if (stat1Value.value > 100) {
+    stat1Value.value = 100;
+  }
+  slider1.value = stat1Value.value;
+  preStat1Value.textContent = stat1Value.value;
+  preSlider1Fill.style.width = stat1Value.value + "%";
+});
+
+// 수치 100 초과한 값 입력 시 프리뷰 슬라이더 넘치는 현상 해결
+
+// 특이사항 및 특이사항 설명 프리뷰
+const trait = document.querySelector(".trait");
+const preTrait = document.querySelector(".pre-trait");
+trait.addEventListener("input", () => {
+  preTrait.textContent = trait.value;
+});
+
+const traitText = document.querySelector(".trait-text");
+const preTraitText = document.querySelector(".pre-trait-text");
+traitText.addEventListener("input", () => {
+  preTraitText.textContent = traitText.value;
+});
+
+// 특이사항 12글자까지만 입력할 수 있도록 제한
+trait.maxLength = 9;
+
+// 특이사항 설명 40글자까지만 입력할 수 있도록 제한
+traitText.maxLength = 40;
