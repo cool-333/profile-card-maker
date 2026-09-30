@@ -1,5 +1,3 @@
-// mbti에 - 또는 알파벳 대문자 또는 소문자만 출력될 수 있도록 제한
-
 // 포인트 컬러피커 움직이면 헥스코드 출력
 const ptPicker = document.querySelector(".pt-picker");
 ptPicker.addEventListener("input", () => {
@@ -274,6 +272,8 @@ const preName = document.querySelector(".pre-name");
 name.addEventListener("input", () => {
   preName.textContent = name.value;
 });
+
+// mbti에 -, 알파벳 대문자, 소문자만 출력될 수 있도록 제한
 const mbti = document.querySelector(".mbti");
 mbti.addEventListener("input", (e) => {
   e.target.value = e.target.value.replace(/[^A-Za-z-]/g, "");

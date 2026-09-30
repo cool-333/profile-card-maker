@@ -53,7 +53,7 @@ body {
 
 .preview {
   width: 343px;
-  height: 350px;
+  min-height: 350px;
   background-color: var(--darknavy);
   border: 2px var(--background) solid;
   border-radius: 16px;
