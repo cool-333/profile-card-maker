@@ -187,84 +187,75 @@ updateColorValues(bgPicker, bgHex, bgRgb, bgHsl, true);
 updateColorValues(ptPicker, ptHex, ptRgb, ptHsl, false);
 updateColorValues(bgPicker, bgHex, bgRgb, bgHsl, true);
 
-// 윗쪽 항목 추가. 위아래 항목 삭제
-const addHobby = document.querySelector(".add-hobby");
-addHobby.addEventListener("click", () => {
-  const newContent = document.createElement("div");
-  newContent.classList.add("hobby-content");
-
-  const addInput = document.createElement("input");
-  const addInputText = document.createElement("input");
-  const addDeleteBt = document.createElement("button");
-  newContent.appendChild(addInput);
-  newContent.appendChild(addInputText);
-  newContent.appendChild(addDeleteBt);
-  addInput.maxLength = 6;
-  addInput.placeholder = "항목";
-  addInputText.maxLength = 20;
-  addInputText.placeholder = "내용";
-  addDeleteBt.textContent = "삭제";
-
-  newContent.appendChild(addInput);
-  newContent.appendChild(addInputText);
-  newContent.appendChild(addDeleteBt);
-  addHobby.parentElement.insertBefore(newContent, addHobby);
-  addInput.classList.add("inputbox", "hobby");
-  addInputText.classList.add("inputbox", "hobby-text");
-  addDeleteBt.classList.add("delete");
-
-  addDeleteBt.addEventListener("click", () => {
-    newContent.remove();
+// 입력 행과 미리보기 행을 함께 관리합니다.
+function connectRows(button, rows, previews, limit, isStat = false) {
+  const template = rows[0].cloneNode(true);
+  const previewTemplate = previews[0].cloneNode(true);
+  const pairs = new Map();
+  const updateButton = () => { button.disabled = pairs.size >= limit; };
+  function connect(row, preview) {
+    pairs.set(row, preview);
+    const inputs = row.querySelectorAll("input");
+    inputs[0].addEventListener("input", () => {
+      preview.children[0].textContent = inputs[0].value;
+    });
+    if (isStat) {
+      inputs[2].step = 1;
+      function updateValue(source) {
+        const value = Math.max(0, Math.min(100, Number(source.value) || 0));
+        inputs[1].value = value;
+        inputs[2].value = value;
+        preview.children[2].textContent = value;
+        preview.children[1].firstElementChild.style.width = value + "%";
+      }
+      inputs[1].addEventListener("input", () => updateValue(inputs[1]));
+      inputs[2].addEventListener("input", () => updateValue(inputs[2]));
+    } else {
+      inputs[1].addEventListener("input", () => {
+        preview.children[1].textContent = inputs[1].value;
+      });
+    }
+    row.querySelector(".delete").addEventListener("click", () => {
+      row.remove();
+      preview.remove();
+      pairs.delete(row);
+      updateButton();
+      if (isStat) document.querySelector("#pre-statbox").hidden = pairs.size === 0;
+    });
+  }
+  rows.forEach((row, index) => connect(row, previews[index]));
+  button.addEventListener("click", () => {
+    if (pairs.size >= limit) return;
+    const row = template.cloneNode(true);
+    const preview = previewTemplate.cloneNode(true);
+    preview.removeAttribute("id");
+    preview.classList.add(isStat ? "pre-stat-row" : "pre-detail-row");
+    row.querySelectorAll("input").forEach(input => {
+      input.value = input.type === "range" || input.type === "number" ? "0" : "";
+    });
+    preview.children[0].textContent = "";
+    if (isStat) {
+      preview.children[2].textContent = "0";
+      preview.children[1].firstElementChild.style.width = "0%";
+      const box = document.querySelector("#pre-statbox");
+      box.appendChild(preview);
+      box.hidden = false;
+    } else {
+      preview.children[1].textContent = "";
+      document.querySelector(".preview").insertBefore(preview, document.querySelector("#pre-statbox"));
+    }
+    button.before(row);
+    connect(row, preview);
+    updateButton();
   });
-});
-
-const deleteBts = document.querySelectorAll(".delete");
-deleteBts.forEach((deleteBt) => {
-  deleteBt.addEventListener("click", () => {
-    deleteBt.parentElement.remove();
-  });
-});
-
-const addStat = document.querySelector(".add-stat");
-addStat.addEventListener("click", () => {
-  const newStat = document.createElement("div");
-  newStat.classList.add("status1");
-  const newStatInput = document.createElement("input");
-  const newStatInputText = document.createElement("input");
-  const newStatInputValue = document.createElement("input");
-  const newStatDeleteBt = document.createElement("button");
-  newStatInput.classList.add("inputbox", "stat1");
-  newStatInputText.classList.add("inputbox", "stat1-value");
-  newStatInputValue.classList.add("slider1");
-  newStatDeleteBt.classList.add("delete");
-  newStatInput.maxLength = 4;
-  newStatInput.placeholder = "항목";
-  newStatInputText.type = "number";
-  newStatInputText.min = 0;
-  newStatInputText.max = 100;
-  newStatInputText.maxLength = 3;
-  newStatInputText.placeholder = "수치";
-  newStatDeleteBt.textContent = "삭제";
-  newStatInputValue.type = "range";
-  newStatInputValue.min = 0;
-  newStatInputValue.max = 100;
-  newStatInputValue.value = 0;
-  newStatInputValue.step = 10;
-  newStat.appendChild(newStatInput);
-  newStat.appendChild(newStatInputText);
-  newStat.appendChild(newStatInputValue);
-  newStat.appendChild(newStatDeleteBt);
-  addStat.parentElement.insertBefore(newStat, addStat);
-
-  newStat.appendChild(newStatInput);
-  newStat.appendChild(newStatInputText);
-  newStat.appendChild(newStatInputValue);
-  newStat.appendChild(newStatDeleteBt);
-  addStat.parentElement.insertBefore(newStat, addStat);
-  newStatDeleteBt.addEventListener("click", () => {
-    newStat.remove();
-  });
-});
+  updateButton();
+}
+connectRows(document.querySelector(".add-hobby"),
+  [...document.querySelectorAll(".hobby-content, .like-content")],
+  [...document.querySelectorAll("#pre-hobby-text, #pre-like-text")], 3);
+connectRows(document.querySelector(".add-stat"),
+  [...document.querySelectorAll(".status1, .status2, .status3, .status4")],
+  [...document.querySelector("#pre-statbox").children], 6, true);
 
 // 왼쪽에서 입력하면 오른쪽으로 반영되도록 세팅
 const name = document.querySelector(".name");
@@ -287,124 +278,6 @@ const preInAWord = document.querySelector(".pre-in-a-word");
 inAWorld.addEventListener("input", () => {
   preInAWord.textContent = inAWorld.value;
 });
-
-const hobby = document.querySelector(".hobby");
-const preHobby = document.querySelector(".pre-hobby");
-hobby.addEventListener("input", () => {
-  preHobby.textContent = hobby.value;
-});
-const hobbyContent = document.querySelector(".hobby-text");
-const preHobbyText = document.querySelector(".pre-hobby-text");
-hobbyContent.addEventListener("input", () => {
-  preHobbyText.textContent = hobbyContent.value;
-});
-
-const like = document.querySelector(".like");
-const preLike = document.querySelector(".pre-like");
-like.addEventListener("input", () => {
-  preLike.textContent = like.value;
-});
-const likeContent = document.querySelector(".like-text");
-const preLikeText = document.querySelector(".pre-like-text");
-likeContent.addEventListener("input", () => {
-  preLikeText.textContent = likeContent.value;
-});
-
-// 슬라이더 값을 슬라이더 수치값과 동일하게 하는 기능 by 도움
-const stat1 = document.querySelector(".stat1");
-const stat1Value = document.querySelector(".stat1-value");
-const slider1 = document.querySelector(".slider1");
-const preStat1 = document.querySelector(".pre-stat1");
-const preStat1Value = document.querySelector(".pre-stat1-value");
-const preSlider1Fill = document.querySelector(".pre-slider1-fill");
-// 항목 입력 → 오른쪽 항목
-stat1.addEventListener("input", () => {
-  preStat1.textContent = stat1.value;
-});
-// 숫자 입력 → 왼쪽 슬라이더 + 오른쪽 숫자 + 오른쪽 게이지
-stat1Value.addEventListener("input", () => {
-  slider1.value = stat1Value.value;
-  preStat1Value.textContent = stat1Value.value;
-  preSlider1Fill.style.width = stat1Value.value + "%";
-});
-// 왼쪽 슬라이더 → 왼쪽 숫자 + 오른쪽 숫자 + 오른쪽 게이지
-slider1.addEventListener("input", () => {
-  stat1Value.value = slider1.value;
-  preStat1Value.textContent = slider1.value;
-  preSlider1Fill.style.width = slider1.value + "%";
-});
-
-const stat2 = document.querySelector(".stat2");
-const stat2Value = document.querySelector(".stat2-value");
-const slider2 = document.querySelector(".slider2");
-const preStat2 = document.querySelector(".pre-stat2");
-const preStat2Value = document.querySelector(".pre-stat2-value");
-const preSlider2Fill = document.querySelector(".pre-slider2-fill");
-stat2.addEventListener("input", () => {
-  preStat2.textContent = stat2.value;
-});
-stat2Value.addEventListener("input", () => {
-  slider2.value = stat2Value.value;
-  preStat2Value.textContent = stat2Value.value;
-  preSlider2Fill.style.width = stat2Value.value + "%";
-});
-slider2.addEventListener("input", () => {
-  stat2Value.value = slider2.value;
-  preStat2Value.textContent = slider2.value;
-  preSlider2Fill.style.width = slider2.value + "%";
-});
-
-const stat3 = document.querySelector(".stat3");
-const stat3Value = document.querySelector(".stat3-value");
-const slider3 = document.querySelector(".slider3");
-const preStat3 = document.querySelector(".pre-stat3");
-const preStat3Value = document.querySelector(".pre-stat3-value");
-const preSlider3Fill = document.querySelector(".pre-slider3-fill");
-stat3.addEventListener("input", () => {
-  preStat3.textContent = stat3.value;
-});
-stat3Value.addEventListener("input", () => {
-  slider3.value = stat3Value.value;
-  preStat3Value.textContent = stat3Value.value;
-  preSlider3Fill.style.width = stat3Value.value + "%";
-});
-slider3.addEventListener("input", () => {
-  stat3Value.value = slider3.value;
-  preStat3Value.textContent = slider3.value;
-  preSlider3Fill.style.width = slider3.value + "%";
-});
-
-const stat4 = document.querySelector(".stat4");
-const stat4Value = document.querySelector(".stat4-value");
-const slider4 = document.querySelector(".slider4");
-const preStat4 = document.querySelector(".pre-stat4");
-const preStat4Value = document.querySelector(".pre-stat4-value");
-const preSlider4Fill = document.querySelector(".pre-slider4-fill");
-stat4.addEventListener("input", () => {
-  preStat4.textContent = stat4.value;
-});
-stat4Value.addEventListener("input", () => {
-  slider4.value = stat4Value.value;
-  preStat4Value.textContent = stat4Value.value;
-  preSlider4Fill.style.width = stat4Value.value + "%";
-});
-slider4.addEventListener("input", () => {
-  stat4Value.value = slider4.value;
-  preStat4Value.textContent = slider4.value;
-  preSlider4Fill.style.width = slider4.value + "%";
-});
-
-// 수치값을 100 초과하게 입력하지 못하도록 제한  -------------------- 🎈 2 3 4 도 수정 필요 🎈 --------------------
-stat1Value.addEventListener("input", () => {
-  if (stat1Value.value > 100) {
-    stat1Value.value = 100;
-  }
-  slider1.value = stat1Value.value;
-  preStat1Value.textContent = stat1Value.value;
-  preSlider1Fill.style.width = stat1Value.value + "%";
-});
-
-// 수치 100 초과한 값 입력 시 프리뷰 슬라이더 넘치는 현상 해결
 
 // 특이사항 및 특이사항 설명 프리뷰
 const trait = document.querySelector(".trait");

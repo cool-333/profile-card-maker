@@ -367,7 +367,8 @@ body {
 }
 
 #pre-hobby-text,
-#pre-like-text {
+#pre-like-text,
+.pre-detail-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
@@ -402,7 +403,8 @@ body {
 #pre-statbox1,
 #pre-statbox2,
 #pre-statbox3,
-#pre-statbox4 {
+#pre-statbox4,
+.pre-stat-row {
   display: flex;
   justify-content: space-around;
 }
@@ -493,4 +495,10 @@ body {
   left: 194px;
   transform: rotate(45deg);
   border: 1px var(--darkred) dashed;
+}
+
+.add-hobby:disabled,
+.add-stat:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
