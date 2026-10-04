@@ -297,3 +297,55 @@ trait.maxLength = 9;
 
 // 특이사항 설명 40글자까지만 입력할 수 있도록 제한
 traitText.maxLength = 40;
+
+// 카드만 캡처하고 둥근 모서리 바깥의 픽셀은 투명하게 저장합니다.
+const savePng = document.querySelector("#save-png");
+const savePngStatus = document.querySelector("#save-png-status");
+savePng.addEventListener("click", async () => {
+  savePng.disabled = true;
+  savePng.textContent = "PNG 저장 중…";
+  savePngStatus.textContent = "";
+  let downloadUrl;
+  try {
+    if (typeof htmlToImage === "undefined" || typeof htmlToImage.toCanvas !== "function") {
+      throw new Error("이미지 저장 기능을 불러오지 못했습니다. 인터넷 연결을 확인하고 새로고침해 주세요.");
+    }
+    await document.fonts.ready;
+    const card = document.querySelector(".preview");
+    // 현재 DOM의 계산된 스타일과 웹폰트를 복제해 브라우저로 렌더링합니다.
+    const source = await htmlToImage.toCanvas(card, {
+      pixelRatio: 1,
+      preferredFontFormat: "woff2",
+      style: { margin: "0" },
+    });
+    const result = document.createElement("canvas");
+    result.width = source.width;
+    result.height = source.height;
+    const context = result.getContext("2d");
+    const bounds = card.getBoundingClientRect();
+    const radius = parseFloat(getComputedStyle(card).borderTopLeftRadius);
+    const rx = radius * result.width / bounds.width;
+    const ry = radius * result.height / bounds.height;
+    context.beginPath();
+    context.roundRect(0, 0, result.width, result.height, { x: rx, y: ry });
+    context.clip();
+    context.drawImage(source, 0, 0);
+    const blob = await new Promise((resolve, reject) => {
+      result.toBlob(value => value ? resolve(value) : reject(new Error("PNG 생성에 실패했습니다. 다시 시도해 주세요.")), "image/png");
+    });
+    downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = "profile-card.png";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    savePngStatus.textContent = "PNG 파일 다운로드를 시작했습니다.";
+  } catch (error) {
+    savePngStatus.textContent = error.message || "PNG 저장에 실패했습니다. 다시 시도해 주세요.";
+  } finally {
+    if (downloadUrl) setTimeout(() => URL.revokeObjectURL(downloadUrl), 60000);
+    savePng.disabled = false;
+    savePng.textContent = "투명 PNG로 저장하기";
+  }
+});
