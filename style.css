@@ -326,6 +326,7 @@ body {
 
 .preview {
   padding: 15px 20px;
+  position: relative;
 }
 
 .preview-panel {
@@ -530,9 +531,10 @@ body {
   font-size: 12px;
   width: 180px;
   text-align: center;
-  position: relative;
-  top: -288px;
-  left: 194px;
+  position: absolute;
+  top: 25px;
+  right: -55px;
+  pointer-events: none;
   transform: rotate(45deg);
   border: 1px var(--darkred) dashed;
 }

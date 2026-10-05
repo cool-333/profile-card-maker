@@ -200,6 +200,7 @@ function connectRows(button, rows, previews, limit, isStat = false) {
       preview.children[0].textContent = inputs[0].value;
     });
     if (isStat) {
+      // 정확한 숫자 입력을 유지하고, 슬라이더 조작만 10 단위로 맞춥니다.
       inputs[2].step = 1;
       function updateValue(source) {
         const value = Math.max(0, Math.min(100, Number(source.value) || 0));
@@ -209,7 +210,10 @@ function connectRows(button, rows, previews, limit, isStat = false) {
         preview.children[1].firstElementChild.style.width = value + "%";
       }
       inputs[1].addEventListener("input", () => updateValue(inputs[1]));
-      inputs[2].addEventListener("input", () => updateValue(inputs[2]));
+      inputs[2].addEventListener("input", () => {
+        inputs[2].value = Math.round(Number(inputs[2].value) / 10) * 10;
+        updateValue(inputs[2]);
+      });
     } else {
       inputs[1].addEventListener("input", () => {
         preview.children[1].textContent = inputs[1].value;
