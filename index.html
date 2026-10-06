@@ -4,21 +4,254 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>프로필 카드 메이커</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h3>프로필 카드 메이커</h3>
-    <ul>
-      <li><b>프로젝트명</b> : 프로필 카드 메이커 (Profile Card Maker)</li>
-      <li>
-        <b>한 줄 설명</b> : 어려운 프로그램을 설치하거나, 디자인을 전공하지
-        않아도 간단하게 자신을 설명하는 프로필 카드
-      </li>
-      <li>
-        <b>핵심 타겟</b> : 자신을 개성 있게 표현하고 싶지만, 디자인 툴을 다루지
-        못해 <mark>텍스트 입력만으로</mark> 10초 만에
-        <i><u>게임 컨셉의 프로필 카드</u></i
-        >를 만들고 싶은 사람들.
-      </li>
-    </ul>
+    <div class="outbox">
+      <!-- 여기서부터 입력창 박스 코드 -->
+      <div class="writebox">
+        <span class="preset-bts">
+          <button id="bt-blue">다크 블루</button
+          ><button id="bt-green">에메랄드</button
+          ><button id="bt-pink">코랄 핑크</button>
+        </span>
+
+        <span class="color-container">
+          <div class="inputbox point-box">
+            <div class="color-title">
+              <p id="pt-color">포인트/카드 테두리 색상</p>
+              <input type="color" class="pt-picker" value="#38bdf8" />
+            </div>
+            <span class="pt-color-value">
+              <div class="color-value-row">
+                <p>RGB</p>
+                <span id="pt-color-rgb"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HSL</p>
+                <span id="pt-color-hsl"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HEX</p>
+                <span id="pt-color-hex"></span>
+              </div>
+            </span>
+          </div>
+
+          <div class="inputbox back-box">
+            <div class="color-title">
+              <p id="bg-color">전체 배경 색상</p>
+              <input type="color" class="bg-picker" value="#1e293b" />
+            </div>
+            <span class="bg-color-value">
+              <div class="color-value-row">
+                <p>RGB</p>
+                <span id="bg-color-rgb"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HSL</p>
+                <span id="bg-color-hsl"></span>
+              </div>
+              <div class="color-value-row">
+                <p>HEX</p>
+                <span id="bg-color-hex"></span>
+              </div>
+            </span>
+          </div>
+        </span>
+        <div class="name-mbti">
+          <input
+            class="inputbox name"
+            maxlength="8"
+            placeholder="이름을 입력하세요"
+          />
+          <input class="inputbox mbti" maxlength="6" placeholder="MBTI" />
+        </div>
+        <input
+          class="inputbox in-a-word"
+          maxlength="21"
+          placeholder="소개 한 마디"
+        />
+
+        <div class="hobby-content">
+          <input class="inputbox hobby" maxlength="6" placeholder="항목" />
+          <input
+            class="inputbox hobby-text"
+            maxlength="15"
+            placeholder="내용"
+          />
+          <button class="delete">삭제</button>
+        </div>
+        <div class="like-content">
+          <input class="inputbox like" maxlength="6" placeholder="항목" />
+          <input class="inputbox like-text" maxlength="15" placeholder="내용" />
+          <button class="delete">삭제</button>
+        </div>
+
+        <button class="add-hobby">+ 항목 추가하기</button>
+
+        <div class="status1">
+          <input class="inputbox stat1" maxlength="4" placeholder="항목" />
+          <input
+            class="inputbox stat1-value"
+            value="0"
+            min="0"
+            max="100"
+            maxlength="3"
+            placeholder="수치"
+            type="number"
+          />
+          <input
+            type="range"
+            class="slider1"
+            min="0"
+            max="100"
+            value="0"
+            step="10"
+          />
+          <button class="delete">삭제</button>
+        </div>
+
+        <div class="status2">
+          <input class="inputbox stat2" maxlength="4" placeholder="항목" />
+          <input
+            class="inputbox stat2-value"
+            value="0"
+            min="0"
+            max="100"
+            maxlength="3"
+            placeholder="수치"
+            type="number"
+          />
+          <input
+            type="range"
+            class="slider2"
+            min="0"
+            max="100"
+            value="0"
+            step="10"
+          />
+          <button class="delete">삭제</button>
+        </div>
+
+        <div class="status3">
+          <input class="inputbox stat3" maxlength="4" placeholder="항목" />
+          <input
+            class="inputbox stat3-value"
+            value="0"
+            min="0"
+            max="100"
+            maxlength="3"
+            placeholder="수치"
+            type="number"
+          />
+          <input
+            type="range"
+            class="slider3"
+            min="0"
+            max="100"
+            value="0"
+            step="10"
+          />
+          <button class="delete">삭제</button>
+        </div>
+
+        <div class="status4">
+          <input class="inputbox stat4" maxlength="4" placeholder="항목" />
+          <input
+            class="inputbox stat4-value"
+            value="0"
+            min="0"
+            max="100"
+            maxlength="3"
+            placeholder="수치"
+            type="number"
+          />
+          <input
+            type="range"
+            class="slider4"
+            min="0"
+            max="100"
+            value="0"
+            step="10"
+          />
+          <button class="delete">삭제</button>
+        </div>
+        <button class="add-stat">+ 능력치 추가하기</button>
+
+        <input class="inputbox trait" maxlength="9" placeholder="⚠특이사항" />
+        <textarea
+          class="inputbox trait-text"
+          maxlength="40"
+          placeholder="특이사항에 관한 설명을 입력하세요"
+        ></textarea>
+      </div>
+
+      <!-- 여기서부터 프리뷰 박스 코드 -->
+      <div class="preview-panel">
+      <div class="preview">
+        <div id="pre-name-mbti">
+          <div class="pre-name">익명의 개발자</div>
+          <div class="pre-mbti">INFJ-T</div>
+        </div>
+        <blockquote class="pre-in-a-word">"카페인 수혈 중···."</blockquote>
+
+        <div id="pre-hobby-text">
+          <div class="pre-hobby">취미</div>
+          <div class="pre-hobby-text">음악 듣기</div>
+        </div>
+
+        <div id="pre-like-text">
+          <div class="pre-like">좋아하는 것</div>
+          <div class="pre-like-text">탄산음료</div>
+        </div>
+
+        <div id="pre-statbox">
+          <div id="pre-statbox1">
+            <div class="pre-stat1">체력</div>
+            <div class="pre-slider1">
+              <div class="pre-slider1-fill"></div>
+            </div>
+            <div class="pre-stat1-value">20</div>
+          </div>
+          <div id="pre-statbox2">
+            <div class="pre-stat2">근력</div>
+            <div class="pre-slider2">
+              <div class="pre-slider2-fill"></div>
+            </div>
+            <div class="pre-stat2-value">30</div>
+          </div>
+          <div id="pre-statbox3">
+            <div class="pre-stat3">집중력</div>
+            <div class="pre-slider3">
+              <div class="pre-slider3-fill"></div>
+            </div>
+            <div class="pre-stat3-value">90</div>
+          </div>
+          <div id="pre-statbox4">
+            <div class="pre-stat4">관찰력</div>
+            <div class="pre-slider4"><div class="pre-slider4-fill"></div></div>
+            <div class="pre-stat4-value">100</div>
+          </div>
+        </div>
+
+        <div class="pre-trait">⚠특이사항</div>
+        <div class="pre-trait-text">마감일을 엄수하려는 성향이 있다.</div>
+
+        <div class="UNLOCKED">UNLOCKED</div>
+      </div>
+      <button type="button" id="save-png">투명 PNG로 저장하기</button>
+      <p id="save-png-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.js"></script>
+    <script src="./move.js"></script>
   </body>
 </html>
