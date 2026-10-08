@@ -5,17 +5,21 @@
 https://cool-333.github.io/profile-card-maker/ 해당 링크에 접속하면 바로 만들 수 있습니다.<br>
 (+PC버전에서 사용한다는 전제 하에 제작되었습니다.)
 
-사이트 진입 시 입력할 수 있는 화면입니다.
+사이트 진입 시 입력할 수 있는 화면입니다.<br>
+실제 진입 시 좌측은 공란이며, 칸에 내용을 입력하면 실시간으로 우측에서 미리 볼 수 있습니다.
 ![사이트 진입 시 입력 화면](/preview_screen/preview_typing-screen.png)
 
 팔레트를 드래그하거나 rgb값 등을 입력하여 포인트 색상과 배경색을 바꿀 수 있습니다.
-![컬러 변경 화면](/preview_screen/preview_color-changing.gif)
+![컬러 변경 구현](/preview_screen/preview_color-changing.gif)
 
 색상 선정에 어려움이 있다면 프리뷰 테마를 이용해도 좋습니다.
-![테마 변경 화면](/preview_screen/preview_theme-changing.gif)
+![테마 변경 구현](/preview_screen/preview_theme-changing.gif)
 
-"투명 PNG로 저장하기" 버튼을 누르면 아래와 같은 결과물이 완성됩니다.
-![저장한 카드 화면](/preview_screen/preview_result-card.png)
+취미란은 최대 3개까지, 스탯란은 최대 6개까지 입력할 수 있습니다.
+![추가 및 삭제 기능](/preview_screen/preview_add-and-delete.gif)
+
+"투명 PNG로 저장하기" 버튼을 누르면 아래와 같은 결과물이 완성됩니다.<br>
+![저장한 카드 결과](/preview_screen/preview_result-card.png)
 
 
 
